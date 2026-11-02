@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="theme-color" content="#000000">
+<title>Desk</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+<link rel="stylesheet" href="/app.css">
+</head>
+<body>
+<header class="top">
+  <h1 id="title">Home</h1>
+  <span id="mode" class="badge paper">PAPER</span>
+</header>
+<main id="view">
+  <section data-tab="home" class="tab active">
+    <div class="state loading" id="home-loading">Loading…</div>
+    <div class="state empty hidden" id="home-empty">No coins yet tonight.</div>
+    <div class="state error hidden" id="home-error">Can’t reach the desk. <button class="retry">Retry</button></div>
+    <div id="home-body" class="hidden">
+      <div class="card"><div class="label">Balance</div><div class="big" id="balance">–</div></div>
+      <div class="card"><div class="label">Open positions</div><div id="positions"></div></div>
+      <canvas id="pnl-chart" height="120"></canvas>
+    </div>
+  </section>
+  <section data-tab="agents" class="tab">
+    <div class="grid" id="agents-grid"></div>
+  </section>
+  <section data-tab="activity" class="tab">
+    <div class="state empty hidden" id="activity-empty">Nothing happened yet.</div>
+    <ul class="list" id="activity-list"></ul>
+  </section>
+  <section data-tab="account" class="tab">
+    <div class="card"><div class="label">FOMO</div><a id="profile" target="_blank" rel="noopener">Profile</a> · <a id="signup" target="_blank" rel="noopener">Invite</a></div>
+    <div id="settings-list"></div>
+  </section>
+</main>
+<nav class="tabs">
+  <button data-go="home" class="on">Home</button>
+  <button data-go="agents">Agents</button>
+  <button data-go="activity">Activity</button>
+  <button data-go="account">Account</button>
+</nav>
+<script src="/chart.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>
