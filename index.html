@@ -13,36 +13,59 @@
 </head>
 <body>
 <header class="top">
+  <button id="back" class="back hidden">‹ Back</button>
   <h1 id="title">Home</h1>
   <span id="mode" class="badge paper">PAPER</span>
 </header>
 <main id="view">
   <section data-tab="home" class="tab active">
     <div class="state loading" id="home-loading">Loading…</div>
-    <div class="state empty hidden" id="home-empty">No coins yet tonight.</div>
     <div class="state error hidden" id="home-error">Can’t reach the desk. <button class="retry">Retry</button></div>
     <div id="home-body" class="hidden">
-      <div class="card"><div class="label">Balance</div><div class="big" id="balance">–</div></div>
-      <div class="card"><div class="label">Open positions</div><div id="positions"></div></div>
-      <canvas id="pnl-chart" height="120"></canvas>
+      <div class="card"><div class="label">Balance <span id="bal-mode"></span></div><div class="big" id="balance">–</div>
+        <div id="bal-delta" class="label"></div>
+        <canvas id="pnl-chart" height="120"></canvas>
+        <div class="state empty hidden" id="chart-empty">Waiting for the first trade</div></div>
+      <div class="card"><div class="label">Open positions</div><ul class="list" id="positions"></ul></div>
+      <div class="card"><div class="label">Tonight</div><div class="stats" id="counts"></div></div>
+      <div class="card"><div class="label">Closed</div><ul class="list" id="closed"></ul></div>
     </div>
   </section>
   <section data-tab="agents" class="tab">
-    <div class="grid" id="agents-grid"></div>
+    <div class="state loading" id="agents-loading">Loading…</div>
+    <div class="state error hidden" id="agents-error">Can’t reach the desk. <button class="retry">Retry</button></div>
+    <div class="state empty hidden" id="agents-empty">No heartbeats yet — desk not started.</div>
+    <div id="agents-grid"></div>
+    <div class="card hidden" id="activity-card"><div class="label">Activity</div><ul class="list" id="activity-list"></ul></div>
   </section>
-  <section data-tab="activity" class="tab">
-    <div class="state empty hidden" id="activity-empty">Nothing happened yet.</div>
-    <ul class="list" id="activity-list"></ul>
+  <section data-tab="auditor" class="tab">
+    <div class="state loading" id="auditor-loading">Loading…</div>
+    <div class="state error hidden" id="auditor-error">Can’t reach the desk. <button class="retry">Retry</button></div>
+    <div class="state empty hidden" id="auditor-empty">No coin reached the Auditor yet tonight.</div>
+    <div id="auditor-list"></div>
+  </section>
+  <section data-tab="coin" class="tab">
+    <div class="state loading" id="coin-loading">Loading…</div>
+    <div class="state error hidden" id="coin-error">Can’t load this coin. <button class="retry">Retry</button></div>
+    <div class="state empty hidden" id="coin-empty">Pick a coin from Home, Agents or Auditor.</div>
+    <div id="coin-body" class="hidden"></div>
   </section>
   <section data-tab="account" class="tab">
-    <div class="card"><div class="label">FOMO</div><a id="profile" target="_blank" rel="noopener">Profile</a> · <a id="signup" target="_blank" rel="noopener">Invite</a></div>
-    <div id="settings-list"></div>
+    <div class="state loading" id="account-loading">Loading…</div>
+    <div class="state error hidden" id="account-error">Can’t reach the desk. <button class="retry">Retry</button></div>
+    <div id="account-body" class="hidden">
+      <div class="card"><div class="label">FOMO</div><a id="profile" target="_blank" rel="noopener">Profile</a> · <a id="signup" target="_blank" rel="noopener">Invite</a></div>
+      <div class="card"><div class="label">Desk</div><div id="acct-desk"></div></div>
+      <div class="card"><div class="label">Settings <span class="label" id="settings-ro"></span></div><ul class="list" id="settings-list"></ul>
+        <div class="state empty hidden" id="settings-empty">No settings published yet.</div></div>
+    </div>
   </section>
 </main>
 <nav class="tabs">
   <button data-go="home" class="on">Home</button>
   <button data-go="agents">Agents</button>
-  <button data-go="activity">Activity</button>
+  <button data-go="auditor">Auditor</button>
+  <button data-go="coin">Coin</button>
   <button data-go="account">Account</button>
 </nav>
 <script src="chart.js"></script>
